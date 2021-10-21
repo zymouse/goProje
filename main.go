@@ -21,10 +21,10 @@ func newRoute() {
 	route := gin.Default()
 	{
 		// 初始化swagger
-		docs.SwaggerInfo.BasePath = "/app"
+		docs.SwaggerInfo.BasePath = "/api"
 		route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		// 1.1 设置总路由分组 -- app
-		apiRoute := route.Group("/app")
+		apiRoute := route.Group("/api")
 		{
 			// 设置功能路由--登录注册
 			apiRoute.POST("/register", app.Register)
