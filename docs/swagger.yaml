@@ -1,0 +1,98 @@
+definitions:
+  app.UserLoginInfo:
+    properties:
+      captcha_digit:
+        type: string
+      captcha_id:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    type: object
+  app.UserRegisterInfo:
+    properties:
+      captcha_digit:
+        type: string
+      captcha_id:
+        type: string
+      gender:
+        type: boolean
+      name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: integer
+      repassword:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /base/code:
+    get:
+      consumes:
+      - application/json
+      description: 生成验证编码码和图片
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "40001":
+          description: 验证码生成错误
+          schema:
+            type: string
+      summary: 验证码接口
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户信息
+        in: body
+        name: register
+        required: true
+        schema:
+          $ref: '#/definitions/app.UserLoginInfo'
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "40001":
+          description: 账户与密码不能为空
+          schema:
+            type: string
+        "40003":
+          description: 参数绑定错误
+          schema:
+            type: string
+      summary: 登陆用户接口
+  /register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户信息
+        in: body
+        name: register
+        required: true
+        schema:
+          $ref: '#/definitions/app.UserRegisterInfo'
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "40001":
+          description: 账户与密码不能为空
+          schema:
+            type: string
+        "40002":
+          description: 参数绑定错误
+          schema:
+            type: string
+      summary: 注册用户接口
+swagger: "2.0"
